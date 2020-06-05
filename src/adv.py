@@ -1,7 +1,7 @@
 from room import Room
 from player import *
 from items import Item
-
+import sys
 # Declare all the rooms
 
 room = {
@@ -80,7 +80,18 @@ def start_game():
     print('For help, type \'h\'')
     print(player)
 
-    grabdrop = input(f'This room has: \n {player.current_room.printitems()} \n In your inventory you have:\n {player.printitems()} \n If you would like to pick up something from the room, type get [item], if you would like to leave some of your items behind, type drop [item], if you wish to continue without modifying your inventory, not recommened, but ok, just type ok')
+    def grabdrop():
+        choice = input(f'This room has:     {player.current_room.printitems()} \n In your inventory you have:     {player.printitems()} \n\n If you would like to pick up something from the room, type get [item], if you would like to leave some of your items behind, type drop [item], if you wish to continue without modifying your inventory, not recommened, but ok, just type ok           ')
+        print(choice)
+        if choice == 'ok':
+            pass
+        elif choice == 'get':
+            player.getItem(f'{choice[5:]}')
+        elif choice == 'drop':
+            player.dropItem(f'{choice[6:]}')
+        else:
+            pass
+
     # while not(player.in_treasure):
     # room_items = player.current_room.printitems()
     while not(player.in_treasure):
@@ -89,9 +100,9 @@ def start_game():
         if gamer_input == 'q':
             print('\n     !! Thanks for playing !!\n')
             exit()
-        if gamer_input == 'h':
+        elif gamer_input == 'h':
             print(needhelp)
-        if gamer_input == 'n':
+        elif gamer_input == 'n':
             try:
                 player.current_room = player.current_room.n_to
                 if player.current_room.name == "Treasure Chamber":
@@ -105,35 +116,35 @@ def start_game():
                         exit()
                 else:
                     print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-                    grabdrop = input(f'This room has: \n {player.current_room.printitems()} \n In your inventory you have:\n {player.printitems()} \n If you would like to pick up something from the room, type get [item], if you would like to leave some of your items behind, type drop [item], if you wish to continue without modifying your inventory, not recommened, but ok, just type ok')
+                    grabdrop()
                     # room_items
                     gamer_input
             except:
                 print("There is no room to the north")
                 gamer_input
-        if gamer_input == 's':
+        elif gamer_input == 's':
             try:
                 player.current_room = player.current_room.s_to
                 print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-                grabdrop
+                grabdrop()
                 gamer_input                
             except:
                 print('There is no room to the south.')
                 gamer_input        
-        if gamer_input == 'e':
+        elif gamer_input == 'e':
             try:
                 player.current_room = player.current_room.e_to
                 print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-                grabdrop
+                grabdrop()
                 gamer_input                 
             except: 
                 print('There is no room to the east.')
                 gamer_input
-        if gamer_input == 'w':
+        elif gamer_input == 'w':
             try:
                 player.current_room = player.current_room.w_to
                 print(f' You are now in {player.current_room.name}, {player.current_room.description}')
-                grabdrop
+                grabdrop()
                 gamer_input
             except:
                 print('There is no room to the west.')

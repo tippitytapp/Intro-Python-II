@@ -7,4 +7,7 @@ class Room:
         self.description = description
         self.items = []
     def printitems(self):
-        return self.items[index]["name"]
+        inventory = []
+        for item in self.items:
+            inventory.append(item.name)
+        return inventory

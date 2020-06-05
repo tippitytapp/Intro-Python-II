@@ -13,12 +13,16 @@ class Player:
     def __str__(self):
         return f"          \nWelcome {self.name}, Please take a look around. You're currently in {self.current_room.name}, {self.current_room.description}."
     def printitems(self):
+        # for item in self.items:
+        #     return item
+        inventory = []
         for item in self.items:
-            return item
-    def getItem(self):
-        selection = sys.argv[1]
+            inventory.append(item.name)
+        return inventory
+    def getItem(self, item):
+        selection = item
         self.items.append(selection)
-    def dropItem(self):
-        selection = sys.argv[1]
+    def dropItem(self, item):
+        selection = item
         self.items.remove(selection)
         self.current_room.items.append(selection)
